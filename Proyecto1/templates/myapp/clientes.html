@@ -14,6 +14,32 @@
             agregar nuevos clientes, editar detalles existentes y eliminar
             clientes que ya no sean necesarios.
         </p>
+        <div class="row">
+            {% for cliente in clientes %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow-sm h-100 bg-info-subtle text-info-emphasis">
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            {{cliente.apellido}} {{cliente.nombre}}
+                        </h5>
+                        <p class="card-text mb-1">
+                            <strong>Email:</strong>{{cliente.email}}
+                        </p>
+                        <p class="card-text mb-1">
+                            <strong>Telefono:</strong>{{cliente.telefono}}
+                        </p>
+                        <p class="card-text">
+                            <strong>Direccion:</strong>{{cliente.direccion}}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted text-center">No hay clientes registrados</p>
+            {% endfor %}
+        </div>
         {% endblock %}
     </body>
 </html>

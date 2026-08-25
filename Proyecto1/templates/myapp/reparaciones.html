@@ -14,6 +14,33 @@
             agregar nuevas reparaciones, editar detalles existentes y eliminar
             reparaciones que ya no sean necesarias.
         </p>
+        <div class="row">
+            {% for reparacion in reparaciones %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow-sm h-100 bg-info-subtle text-info-emphasis">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            {{reparacion.equipo}} - {{reparacion.tecnico}}
+                        </h5>
+                        <p class="card-text mb-1">
+                            <strong>Problema reportado:</strong> {{reparacion.problema_reportado}}
+                        </p>
+                         <p class="card-text mb-1">
+                            <strong>Solución:</strong> {{reparacion.solucion}}
+                        </p>
+                         <p class="card-text mb-1">
+                            <strong>Costo:</strong> {{reparacion.costo}}
+                        </p>
+                         <p class="card-text">
+                            <strong>Estado:</strong> {{reparacion.estado}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted text-center">No hay reparaciones registradas.</p>
+            {% endfor %}
+        </div>
         {% endblock %}
     </body>
 </html>

@@ -14,6 +14,34 @@
             agregar nuevos equipos, editar detalles existentes y eliminar
             equipos que ya no sean necesarios.
         </p>
+        <div class="row">
+            {% for equipo in equipos %}
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card shadow-sm h-100 bg-info-subtle text-info-emphasis">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            {{equipo.cliente}} - {{equipo.tipo}}
+                        </h5>
+                        <p class="card-text mb-1">
+                            <strong>Marca:</strong>{{ equipo.marca }}
+                        </p>
+                        <p class="card-text mb-1">
+                            <strong>Modelo:</strong>{{ equipo.modelo }}
+                        </p>
+                        <p class="card-text mb-1">
+                            <strong>Serial:</strong>{{ equipo.numero_serie }}
+                        </p>
+                        
+                        <p class="card-text">
+                            <strong>Observaciones:</strong>{{ equipo.observaciones }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted text-center">No hay equipos registrados</p>
+            {% endfor %}
+        </div>
         {% endblock %}
     </body>
 </html>

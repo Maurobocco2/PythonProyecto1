@@ -59,6 +59,7 @@ class Reparacion(models.Model):
         ('ESPERA', 'Esperando repuesto'),
         ('FINALIZADO', 'Finalizado'),
         ('ENTREGADO', 'Entregado'),
+        ('SIN REPARACION', 'sin reparación')
     ]
 
     equipo = models.ForeignKey(
