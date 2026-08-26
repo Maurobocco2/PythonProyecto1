@@ -22,3 +22,21 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+nav .container {
+    display: flex;
+    gap: 8px; /* espacio entre botones, más prolijo que margin */
+}
+
+.navbar-brand {
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.navbar-brand:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
