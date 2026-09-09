@@ -22,23 +22,20 @@
                     <a class="navbar-brand" href="{% url 'myapp:index' %}">
                         Inicio
                     </a>
-                    <a class="navbar-brand" href="{% url 'myapp:clientes' %}">
-                        Clientes
-                    </a>
-                    <a class="navbar-brand" href="{% url 'myapp:tecnicos' %}">
-                        Tecnicos
-                    </a>
-                    <a class="navbar-brand" href="{% url 'myapp:equipos' %}">
-                        Equipos
-                    </a>
-                    <a
-                        class="navbar-brand"
-                        href="{% url 'myapp:reparaciones' %}"
-                    >
-                        Reparaciones
-                    </a>
-                    <a class="btn btn-primary" href="#NADA">INICIAR</a>
-                </div>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido"
+            aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+                <div class="collapse navbar-collapse" id="navbarContenido">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link text-white btn btn-primary bi bi-people-fill me-2" href="{% url 'myapp:clientes' %}"><span class="ms-2">Clientes</span></a></li>
+                <li class="nav-item"><a class="nav-link text-white btn btn-primary bi bi-headset" href="{% url 'myapp:tecnicos' %}"><span class="ms-2">Tecnicos</span></a></li>
+                <li class="nav-item"><a class="nav-link text-white btn btn-primary bi bi-pc-display" href="{% url 'myapp:equipos' %}"><span class="ms-2">Equipos</span></a></li>
+                <li class="nav-item"><a class="nav-link text-white btn btn-primary bi bi-tools" href="{% url 'myapp:reparaciones' %}"><span class="ms-2">Reparaciones</span></a></li>
+                <li class="nav-item"><a class="nav-link text-white btn btn-primary" href="#NADAAUN">Iniciar</a></li>
+            </ul>
+
             </nav>
         </header>
         <main>
