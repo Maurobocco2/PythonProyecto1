@@ -8,9 +8,12 @@
 
 header {
     background: linear-gradient(90deg, #250397, #1a0242);
-    color: white;
     padding: 10px;
     text-align: center;
+
+   
+        color: white;
+    
 }
 
 footer {
