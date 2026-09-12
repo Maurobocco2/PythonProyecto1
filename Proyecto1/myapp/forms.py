@@ -15,12 +15,11 @@ class ClientesFilter(forms.ModelForm):
 
 
 class TecnicosFormulario(forms.Form):
-        nombre = forms.CharField(max_length=100)
-        apellido = forms.CharField(max_length=100)
-        telefono = forms.CharField(max_length=20)
-        especialidad = forms.CharField(max_length=100)
-
+    nombre = forms.CharField(max_length=100, label="Nombre")
+    apellido = forms.CharField(max_length=100, label="Apellido")
+    telefono = forms.CharField(max_length=20, label= "Telefono")
+    especialidad = forms.CharField(max_length=100, label="Especialidad")
 class TecnicosFilter(forms.ModelForm):
      class Meta:
-          model = Tecnico
-          fields = ['nombre', 'apellido']
+        model = Tecnico
+        fields = ['nombre', 'apellido', 'telefono', 'especialidad']

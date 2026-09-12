@@ -14,7 +14,7 @@
                         {% csrf_token %}
                         <!-- Renderizar campos manualmente para aplicar Bootstrap -->
                         <div class="mb-3">
-<label for="id_nombre" class="form-label">Nombres</label>
+                            <label for="id_nombre" class="form-label">Nombres</label>
                             {{ form.nombre|add_class:"form-control" }}
                         </div>
 
@@ -24,7 +24,7 @@
                             {{ form.apellido|add_class:"form-control" }}
                         </div>
 
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <label for="id_especialidad" class="form-label">Especialidad</label>
                             {{ form.especialidad|add_class:"form-control" }}
                         </div>
@@ -42,9 +42,8 @@
                         </div>
                     </form>
                 </div>
-         </div>
+            </div>
         </div>
     </div>
 </div>
-{% endblock  %}
-
+{% endblock %}

@@ -46,9 +46,11 @@
                     </p>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="#" " class=" btn btn-warning btn-sm bi bi-pencil-square me-2"></a>
-                    <form action="#"
-                        onsubmit="return confirm('¿Seguro que deseas eliminar a {{ cliente.nombre }} {{ cliente.apellido }}?')">
+                    <a href="{% url 'myapp:editar_tecnico' tecnico.id %}" class=" btn btn-warning btn-sm bi bi-pencil-square me-2"></a>
+
+                    <form action="{% url 'myapp:eliminar_tecnico' tecnico.id %}
+" method="post" style="display:inline;"
+                        onsubmit="return confirm('¿Seguro que deseas eliminar a {{ tecnico.nombre }} {{ tecnico.apellido }}?')">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger btn-sm bi bi-trash3-fill"></button>
                     </form>
