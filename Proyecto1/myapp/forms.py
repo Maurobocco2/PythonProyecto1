@@ -23,4 +23,4 @@ class TecnicosFormulario(forms.Form):
 class TecnicosFilter(forms.ModelForm):
      class Meta:
           model = Tecnico
-          fields = ['nombre', 'apellido', 'telefono', 'especialidad']
+          fields = ['nombre', 'apellido']

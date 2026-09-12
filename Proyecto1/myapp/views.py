@@ -37,8 +37,19 @@ def reparaciones(request):
     return render(request, "myapp/reparaciones.html", {"reparaciones": reparaciones})
 
 def tecnicos(request):
-    tecnicos = Tecnico.objects.all()
-    return render(request, "myapp/tecnicos.html", {"tecnicos": tecnicos})
+    query = request.GET.get('q')
+    if query:
+        tecnicos = Tecnico.objects.filter(
+            models.Q(nombre__icontains = query)|
+            models.Q(apellido__icontains = query)
+        )
+    else:
+
+        tecnicos = Tecnico.objects.all()
+    return render(request, 'myapp/tecnicos.html', {
+        'tecnicos': tecnicos, 
+        'query': query
+    })
 
 def agregar_cliente(request):
     if request.method == 'POST':
@@ -78,6 +89,8 @@ def eliminar_cliente(request, id):
         return redirect('myapp:clientes')
     return render(request, 'myapp/clientes.html', {'cliente': cliente})
 
+
+# TECNICOS
 
 def agregar_tecnico(request):
     if request.method == 'POST':
