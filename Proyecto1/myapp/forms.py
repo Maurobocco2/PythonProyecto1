@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente
+from .models import Cliente, Tecnico
 
 
 class ClientesFormulario(forms.Form):
@@ -12,3 +12,15 @@ class ClientesFilter(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ['nombre', 'apellido', 'telefono', 'email']
+
+
+class TecnicosFormulario(forms.Form):
+        nombre = forms.CharField(max_length=100)
+        apellido = forms.CharField(max_length=100)
+        telefono = forms.CharField(max_length=20)
+        especialidad = forms.CharField(max_length=100)
+
+class TecnicosFilter(forms.ModelForm):
+     class Meta:
+          model = Tecnico
+          fields = ['nombre', 'apellido', 'telefono', 'especialidad']

@@ -14,6 +14,8 @@
             agregar nuevos tecnicos, editar detalles existentes y eliminar
             tecnicos que ya no sean necesarios.
         </p>
+         <div class="text-end mb-4"> <a class="btn btn-secondary" href="{% url 'myapp:agregar_tecnico' %}">Agregar Tecnico</a> </div>
+
         <div class="row">
             {% for tecnico in tecnicos %}
             <div class="col-md-4 col-sm-6 mb-4">
