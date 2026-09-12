@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Cliente, Tecnico, Equipo, Reparacion
 from .forms import ClientesFormulario, ClientesFilter
 from django.db import models
-
+from django.shortcuts import get_object_or_404 
 
 
 # Create your views here.
@@ -55,3 +55,27 @@ def agregar_cliente(request):
     else:
         form = ClientesFormulario()
         return render(request, 'myapp/agregar_cliente.html', {'form': form})
+
+def editar_cliente(request, id):
+    cliente = get_object_or_404(Cliente, id=id)
+   
+    if request.method == 'POST':
+        form = ClientesFilter(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:clientes')
+    else:
+        form = ClientesFilter(instance=cliente)
+   
+    return render(request, 'myapp/editar_cliente.html', {'form': form, 'cliente': cliente})
+
+def eliminar_cliente(request, id):
+    cliente = get_object_or_404(Cliente, id=id)
+
+
+    if request.method == 'POST':
+        cliente.delete()
+        return redirect('myapp:clientes')
+    return render(request, 'myapp/clientes.html', {'cliente': cliente})
+
+
