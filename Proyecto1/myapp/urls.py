@@ -22,16 +22,17 @@ app_name ="myapp"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", views.index, name="index"),
-    path("clientes/", views.clientes, name="clientes"),
-    path("equipos/", views.equipos, name="equipos"),
-    path("reparaciones/", views.reparaciones, name="reparaciones"),
-    path("tecnicos/", views.tecnicos, name="tecnicos"),
+    path('', views.index, name='index'),
+    path('clientes/', views.clientes, name='clientes'),
+    path("equipos/", views.equipos, name='equipos'),
+    path('reparaciones/', views.reparaciones, name='reparaciones'),
+    path('tecnicos/', views.tecnicos, name='tecnicos'),
     path('agregar_cliente/', views.agregar_cliente, name='agregar_cliente'),
     path('cliente/editar/<int:id>/', views.editar_cliente, name='editar_cliente'),
     path('cliente/eliminar/<int:id>/', views.eliminar_cliente, name='eliminar_cliente'),
     path('agregar_tecnico', views.agregar_tecnico, name='agregar_tecnico'),
     path('tecnico/editar/<int:id>/', views.editar_tecnico, name='editar_tecnico'),
     path('tecnico/eliminar/<int:id>/', views.eliminar_tecnico, name='eliminar_tecnico'),
-    path('agregar_equipo/', views.agregar_equipo, name='agregar_equipo')
+    path('agregar_equipo/', views.agregar_equipo, name='agregar_equipo'),
+    path('equipos/editar/<int:id>', views.editar_equipo, name='editar_equipo')
 ]

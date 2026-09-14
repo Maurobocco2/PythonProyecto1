@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Tecnico
+from .models import Cliente, Tecnico, Equipo
 
 
 class ClientesFormulario(forms.Form):
@@ -45,3 +45,8 @@ class EquiposFormulario(forms.Form):
     modelo = forms.CharField(max_length=100, label='Modelo')
     numero_serie = forms.CharField(max_length=100, required=False, label='Numero-serie')
     observaciones = forms.CharField(widget=forms.Textarea,  required=False, label='Observaciones')
+
+class EquiposFilter(forms.ModelForm):
+    class Meta:
+        model = Equipo
+        fields = ['tipo', 'marca', 'modelo', 'numero_serie', 'observaciones']

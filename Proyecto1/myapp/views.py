@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Tecnico, Equipo, Reparacion, Equipo
-from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario
+from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario, EquiposFilter
 from django.db import models
 from django.shortcuts import get_object_or_404 
 
@@ -145,3 +145,15 @@ def agregar_equipo(request):
     else:
         form = EquiposFormulario()
         return render(request, 'myapp/agregar_equipo.html', {'form': form})
+
+
+def editar_equipo(request, id):
+    equipo = get_object_or_404(Equipo, id=id)
+    if request.method == 'POST':
+        form = EquiposFilter(request.POST, instance=equipo)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:equipos')
+    else:
+        form = EquiposFilter(instance=equipo)
+    return render(request, 'myapp/editar_equipo.html', {'form': form, 'equipo': equipo})

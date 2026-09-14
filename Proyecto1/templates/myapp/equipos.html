@@ -1,48 +1,60 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Reparaciones de PC</title>
-    </head>
-    <body>
-        {% extends 'base.html' %} {% block title %}Gestión de Equipos
-        {%endblock%} {% block content %}
-        <h1>Gestión de Equipos</h1>
-        <p>
-            Aquí puedes gestionar la información de tus equipos, incluyendo
-            agregar nuevos equipos, editar detalles existentes y eliminar
-            equipos que ya no sean necesarios.
-        </p>
-        <div class="text-end mb-4"> <a class="btn btn-success bi bi-person-fill-add" href="{% url 'myapp:agregar_equipo' %}">Agregar Equipo</a> </div>
-        <div class="row">
-            {% for equipo in equipos %}
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card shadow-sm h-100 bg-info-subtle text-info-emphasis">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">
-                            {{equipo.cliente}} - {{equipo.tipo}}
-                        </h5>
-                        <p class="card-text mb-1">
-                            <strong>Marca:</strong>{{ equipo.marca }}
-                        </p>
-                        <p class="card-text mb-1">
-                            <strong>Modelo:</strong>{{ equipo.modelo }}
-                        </p>
-                        <p class="card-text mb-1">
-                            <strong>Serial:</strong>{{ equipo.numero_serie }}
-                        </p>
-                        
-                        <p class="card-text">
-                            <strong>Observaciones:</strong>{{ equipo.observaciones }}
-                        </p>
-                    </div>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reparaciones de PC</title>
+</head>
+
+<body>
+    {% extends 'base.html' %} {% block title %}Gestión de Equipos
+    {%endblock%} {% block content %}
+    <h1>Gestión de Equipos</h1>
+    <p>
+        Aquí puedes gestionar la información de tus equipos, incluyendo
+        agregar nuevos equipos, editar detalles existentes y eliminar
+        equipos que ya no sean necesarios.
+    </p>
+    <div class="text-end mb-4"> <a class="btn btn-success bi bi-person-fill-add"
+            href="{% url 'myapp:agregar_equipo' %}">Agregar Equipo</a> </div>
+    <div class="row">
+        {% for equipo in equipos %}
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100 bg-info-subtle text-info-emphasis">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">
+                        {{equipo.cliente}} - {{equipo.tipo}}
+                    </h5>
+                    <p class="card-text mb-1">
+                        <strong>Marca:</strong>{{ equipo.marca }}
+                    </p>
+                    <p class="card-text mb-1">
+                        <strong>Modelo:</strong>{{ equipo.modelo }}
+                    </p>
+                    <p class="card-text mb-1">
+                        <strong>Serial:</strong>{{ equipo.numero_serie }}
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Observaciones:</strong>{{ equipo.observaciones }}
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'myapp:editar_equipo' equipo.id %}" class="btn btn-warning btn-sm bi bi-pencil-square me-2"></a>
+                    <form action="" method="POST" style="display:inline;"
+                        onsubmit="return confirm('¿Seguro que deseas eliminar a {{ cliente.nombre }} {{ cliente.apellido }}?')">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm bi bi-trash3-fill"></button>
+                    </form>
                 </div>
             </div>
-            {% empty %}
-            <p class="text-muted text-center">No hay equipos registrados</p>
-            {% endfor %}
         </div>
-        {% endblock %}
-    </body>
+        {% empty %}
+        <p class="text-muted text-center">No hay equipos registrados</p>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+
 </html>
