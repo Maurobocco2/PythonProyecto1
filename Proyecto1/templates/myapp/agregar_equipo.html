@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}Agregar Equipo{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4 animate__animated animate__swing">Agregar Equipo</h1>
+    <p class="text-center mb-4">Completa el siguiente formulario para agregar un nuevo equipo a la base de datos.</p>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form action="{% url 'myapp:agregar_equipo' %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <!-- Renderizar campos manualmente para aplicar Bootstrap -->
+                        <div class="mb-3">
+                            <label for="id_cliente" class="form-label">clientes</label>
+                            {{ form.clientes|add_class:"form-control" }}
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="id_tipo" class="form-label">Tipo</label>
+                            {{ form.tipo|add_class:"form-control" }}
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="id_marca" class="form-label">Marca</label>
+                            {{ form.marca|add_class:"form-control" }}
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="id_modelo" class="form-label">Modelo</label>
+                            {{ form.modelo|add_class:"form-control" }}
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="id_numero_serie" class="form-label">Numero de serie</label>
+                            {{ form.numero_serie|add_class:"form-control" }}
+                        </div>
+
+                          <div class="mb-3">
+                            <label for="id_observaciones" class="form-label">observaciones</label>
+                            {{ form.observaciones|add_class:"form-control" }}
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

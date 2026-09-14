@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Cliente, Tecnico, Equipo, Reparacion
-from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter
+from .models import Cliente, Tecnico, Equipo, Reparacion, Equipo
+from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario
 from django.db import models
 from django.shortcuts import get_object_or_404 
 
@@ -125,3 +125,23 @@ def eliminar_tecnico(request, id):
         tecnico.delete()
         return redirect('myapp:tecnicos')
     return render(request, 'myapp/tecnicos.html', {'tecnico': tecnico})
+
+#EQUIPOS
+
+def agregar_equipo(request):
+    if request.method == 'POST':
+        form = EquiposFormulario(request.POST)
+        if form.is_valid():
+            cliente = form.cleaned_data['clientes']
+            tipo = form.cleaned_data['tipo']
+            marca = form.cleaned_data['marca']
+            modelo = form.cleaned_data['modelo']
+            numero_serie = form.cleaned_data['numero_serie']
+            observaciones = form.cleaned_data['observaciones']
+           
+            equipo = Equipo(cliente = cliente, tipo = tipo, marca = marca, modelo = modelo, numero_serie = numero_serie, observaciones = observaciones)
+            equipo.save()
+            return redirect('myapp:equipos')
+    else:
+        form = EquiposFormulario()
+        return render(request, 'myapp/agregar_equipo.html', {'form': form})

@@ -23,3 +23,25 @@ class TecnicosFilter(forms.ModelForm):
      class Meta:
         model = Tecnico
         fields = ['nombre', 'apellido', 'telefono', 'especialidad']
+
+
+class EquiposFormulario(forms.Form):
+
+    TIPOS_EQUIPO = [
+        ('PC', 'PC de Escritorio'),
+        ('NOTEBOOK', 'Notebook'),
+        ('NETBOOK', 'Netbook'),
+        ('IMPRESORA', 'Impresora'),
+        ('OTRO', 'Otro'),
+    ]
+
+    clientes = forms.ModelChoiceField(
+        queryset=Cliente.objects.all(),
+        empty_label="Seleccione un cliente"
+    )
+
+    tipo = forms.ChoiceField(choices=TIPOS_EQUIPO, label='Nombre')
+    marca = forms.CharField(max_length=50, label='Marca')
+    modelo = forms.CharField(max_length=100, label='Modelo')
+    numero_serie = forms.CharField(max_length=100, required=False, label='Numero-serie')
+    observaciones = forms.CharField(widget=forms.Textarea,  required=False, label='Observaciones')

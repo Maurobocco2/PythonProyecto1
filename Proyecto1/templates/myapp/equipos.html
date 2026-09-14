@@ -14,6 +14,7 @@
             agregar nuevos equipos, editar detalles existentes y eliminar
             equipos que ya no sean necesarios.
         </p>
+        <div class="text-end mb-4"> <a class="btn btn-success bi bi-person-fill-add" href="{% url 'myapp:agregar_equipo' %}">Agregar Equipo</a> </div>
         <div class="row">
             {% for equipo in equipos %}
             <div class="col-md-4 col-sm-6 mb-4">
