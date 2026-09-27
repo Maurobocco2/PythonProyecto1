@@ -6,6 +6,22 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 30px;
+}
+
 header {
     background: linear-gradient(90deg, #250397, #1a0242);
     padding: 10px;
@@ -18,11 +34,7 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }
-
 nav .container {
     display: flex;
     gap: 8px; /* espacio entre botones, más prolijo que margin */

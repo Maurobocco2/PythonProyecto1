@@ -3,6 +3,7 @@ from .models import Cliente, Tecnico, Equipo, Reparacion
 from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario, EquiposFilter, ReparacionesFormulario, ReparacionesFilter
 from django.db import models
 from django.shortcuts import get_object_or_404 
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -79,7 +80,7 @@ def editar_cliente(request, id):
         form = ClientesFilter(instance=cliente)
    
     return render(request, 'myapp/editar_cliente.html', {'form': form, 'cliente': cliente})
-
+@login_required
 def eliminar_cliente(request, id):
     cliente = get_object_or_404(Cliente, id=id)
 
