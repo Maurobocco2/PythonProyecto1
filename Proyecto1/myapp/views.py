@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Tecnico, Equipo, Reparacion
-from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario, EquiposFilter, ReparacionesFormulario
+from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario, EquiposFilter, ReparacionesFormulario, ReparacionesFilter
 from django.db import models
 from django.shortcuts import get_object_or_404 
 
@@ -197,3 +197,33 @@ def agregar_reparacion(request):
         'myapp/agregar_reparacion.html',
         {'form': form}
     )
+
+
+def editar_reparacion(request, id):
+    reparacion = get_object_or_404(Reparacion, id=id)
+
+    if request.method == 'POST':
+        form = ReparacionesFilter(request.POST, instance=reparacion)
+
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:reparaciones')
+
+    else:
+        form = ReparacionesFilter(instance=reparacion)
+
+    return render(
+        request,
+        'myapp/editar_reparacion.html',
+        {
+            'form': form,
+            'reparacion': reparacion
+        }
+    )
+
+def eliminar_reparacion(request, id):
+    if request.method == 'POST':
+        reparacion = get_object_or_404(Reparacion, id=id)
+        reparacion.delete()
+
+    return redirect('myapp:reparaciones')

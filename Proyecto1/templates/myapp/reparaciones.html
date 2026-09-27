@@ -1,48 +1,168 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Reparaciones de PC</title>
-    </head>
-    <body>
-        {% extends 'base.html' %} {% block title %}Gestión de
-        Reparaciones{%endblock %} {% block content %}
-        <h1>Gestión de Reparaciones</h1>
-        <p>
-            Aquí puedes gestionar la información de tus reparaciones, incluyendo
-            agregar nuevas reparaciones, editar detalles existentes y eliminar
-            reparaciones que ya no sean necesarias.
-        </p>
-         <div class="text-end mb-4"> <a class="btn btn-success bi bi-person-fill-add"
-            href="{% url 'myapp:agregar_equipo' %}">Agregar Equipo</a> </div>
-        <div class="row">
-            {% for reparacion in reparaciones %}
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card shadow-sm h-100 bg-info-subtle text-info-emphasis">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">
-                            {{reparacion.equipo}} - {{reparacion.tecnico}}
-                        </h5>
-                        <p class="card-text mb-1">
-                            <strong>Problema reportado:</strong> {{reparacion.problema_reportado}}
-                        </p>
-                         <p class="card-text mb-1">
-                            <strong>Solución:</strong> {{reparacion.solucion}}
-                        </p>
-                         <p class="card-text mb-1">
-                            <strong>Costo:</strong> {{reparacion.costo}}
-                        </p>
-                         <p class="card-text">
-                            <strong>Estado:</strong> {{reparacion.estado}}
-                        </p>
-                    </div>
-                </div>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reparaciones de PC</title>
+</head>
+
+<body>
+    {% extends 'base.html' %} {% block title %}Gestión de
+    Reparaciones{%endblock %} {% block content %}
+    <h1>Gestión de Reparaciones</h1>
+    <div class="container mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>Gestión de Reparaciones</h1>
+                <p class="text-muted mb-0">
+                    Aquí puedes gestionar las reparaciones de los equipos.
+                </p>
             </div>
-            {% empty %}
-            <p class="text-muted text-center">No hay reparaciones registradas.</p>
-            {% endfor %}
+
+            <a class="btn btn-success" href="{% url 'myapp:agregar_reparacion' %}">
+                <i class="bi bi-plus-circle"></i>
+                Nueva Reparación
+            </a>
         </div>
-        {% endblock %}
-    </body>
+
+
+        {% if reparaciones %}
+
+        <div class="table-responsive shadow-sm">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Equipo</th>
+                        <th>Cliente</th>
+                        <th>Técnico</th>
+                        <th>Fecha ingreso</th>
+                        <th>Estado</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for reparacion in reparaciones %}
+
+                    <tr>
+
+                        <td>
+                            {{ reparacion.id }}
+                        </td>
+
+                        <td>
+                            <strong>{{ reparacion.equipo.marca }}</strong>
+                            {{ reparacion.equipo.modelo }}
+                            <br>
+                            <small class="text-muted">
+                                {{ reparacion.equipo.tipo }}
+                            </small>
+                        </td>
+
+                        <td>
+                            {{ reparacion.equipo.cliente }}
+                        </td>
+
+                        <td>
+                            {% if reparacion.tecnico %}
+                            {{ reparacion.tecnico }}
+                            {% else %}
+                            <span class="text-muted">
+                                Sin asignar
+                            </span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {{ reparacion.fecha_ingreso }}
+                        </td>
+
+                        <td>
+
+                            {% if reparacion.estado == 'INGRESADO' %}
+                            <span class="badge text-bg-primary">
+                                Ingresado
+                            </span>
+
+                            {% elif reparacion.estado == 'DIAGNOSTICO' %}
+                            <span class="badge text-bg-info">
+                                En diagnóstico
+                            </span>
+
+                            {% elif reparacion.estado == 'REPARANDO' %}
+                            <span class="badge text-bg-warning">
+                                En reparación
+                            </span>
+
+                            {% elif reparacion.estado == 'ESPERA' %}
+                            <span class="badge text-bg-secondary">
+                                Esperando repuesto
+                            </span>
+
+                            {% elif reparacion.estado == 'FINALIZADO' %}
+                            <span class="badge text-bg-success">
+                                Finalizado
+                            </span>
+
+                            {% elif reparacion.estado == 'ENTREGADO' %}
+                            <span class="badge text-bg-dark">
+                                Entregado
+                            </span>
+
+                            {% elif reparacion.estado == 'SIN REPARACION' %}
+                            <span class="badge text-bg-danger">
+                                Sin reparación
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td class="text-center">
+                            <a href="{% url 'myapp:editar_reparacion' reparacion.id %}"
+                                class="btn btn-warning btn-sm me-1" title="Modificar">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <form method="POST" action="{% url 'myapp:eliminar_reparacion' reparacion.id %}"
+                                class="d-inline">
+
+                                {% csrf_token %}
+
+                                <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-secondary text-center">
+            No hay reparaciones registradas.
+        </div>
+
+        {% endif %}
+
+    </div>
+    {% endblock %}
+</body>
+
 </html>

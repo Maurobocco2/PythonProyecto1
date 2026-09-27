@@ -80,3 +80,77 @@ class ReparacionesFormulario(forms.Form):
         choices=Reparacion.ESTADOS,
         label="Estado"
     )
+
+class ReparacionesFilter(forms.ModelForm):
+
+    class Meta:
+        model = Reparacion
+
+        fields = [
+            'equipo',
+            'tecnico',
+            'fecha_ingreso',
+            'fecha_entrega',
+            'problema_reportado',
+            'diagnostico',
+            'solucion',
+            'costo',
+            'estado'
+        ]
+
+        labels = {
+            'equipo': 'Equipo',
+            'tecnico': 'Técnico',
+            'fecha_ingreso': 'Fecha de ingreso',
+            'fecha_entrega': 'Fecha de entrega',
+            'problema_reportado': 'Problema reportado',
+            'diagnostico': 'Diagnóstico',
+            'solucion': 'Solución realizada',
+            'costo': 'Costo',
+            'estado': 'Estado'
+        }
+
+        widgets = {
+
+            'equipo': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+
+            'tecnico': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+
+            'fecha_ingreso': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+
+            'fecha_entrega': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'form-control'
+            }),
+
+            'problema_reportado': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3
+            }),
+
+            'diagnostico': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3
+            }),
+
+            'solucion': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3
+            }),
+
+            'costo': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'step': '0.01'
+            }),
+
+            'estado': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+        }
