@@ -1,0 +1,16 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+
+<h1>Agregar reparación</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Registrar reparación</button>
+    <a href="{% url 'myapp:reparaciones' %}">Cancelar</a>
+</form>
+
+{% endblock %}

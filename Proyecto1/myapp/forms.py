@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Tecnico, Equipo
+from .models import Cliente, Tecnico, Equipo, Reparacion
 
 
 class ClientesFormulario(forms.Form):
@@ -50,3 +50,33 @@ class EquiposFilter(forms.ModelForm):
     class Meta:
         model = Equipo
         fields = ['tipo', 'marca', 'modelo', 'numero_serie', 'observaciones']
+
+
+class ReparacionesFormulario(forms.Form):
+
+    equipo = forms.ModelChoiceField(
+        queryset=Equipo.objects.all(),
+        empty_label="Seleccione un equipo",
+        label="Equipo"
+    )
+
+    tecnico = forms.ModelChoiceField(
+        queryset=Tecnico.objects.all(),
+        empty_label="Seleccione un técnico",
+        label="Técnico"
+    )
+
+    fecha_ingreso = forms.DateField(
+        label="Fecha de ingreso",
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+
+    problema_reportado = forms.CharField(
+        label="Problema reportado",
+        widget=forms.Textarea
+    )
+
+    estado = forms.ChoiceField(
+        choices=Reparacion.ESTADOS,
+        label="Estado"
+    )

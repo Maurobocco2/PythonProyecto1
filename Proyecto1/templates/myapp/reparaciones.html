@@ -14,6 +14,8 @@
             agregar nuevas reparaciones, editar detalles existentes y eliminar
             reparaciones que ya no sean necesarias.
         </p>
+         <div class="text-end mb-4"> <a class="btn btn-success bi bi-person-fill-add"
+            href="{% url 'myapp:agregar_equipo' %}">Agregar Equipo</a> </div>
         <div class="row">
             {% for reparacion in reparaciones %}
             <div class="col-md-4 col-sm-6 mb-4">

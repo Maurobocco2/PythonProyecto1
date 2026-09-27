@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Cliente, Tecnico, Equipo, Reparacion, Equipo
-from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario, EquiposFilter
+from .models import Cliente, Tecnico, Equipo, Reparacion
+from .forms import ClientesFormulario, ClientesFilter, TecnicosFormulario, TecnicosFilter, EquiposFormulario, EquiposFilter, ReparacionesFormulario
 from django.db import models
 from django.shortcuts import get_object_or_404 
 
@@ -157,3 +157,43 @@ def editar_equipo(request, id):
     else:
         form = EquiposFilter(instance=equipo)
     return render(request, 'myapp/editar_equipo.html', {'form': form, 'equipo': equipo})
+
+def eliminar_equipo(request, id):
+    equipo = get_object_or_404(Equipo, id=id)
+    if request.method == 'POST':
+        equipo.delete()
+        return redirect('myapp:equipos')
+    return render(request, 'myapp/equipos.html', {'equipo': equipo})
+
+
+def agregar_reparacion(request):
+    if request.method == 'POST':
+        form = ReparacionesFormulario(request.POST)
+
+        if form.is_valid():
+            equipo = form.cleaned_data['equipo']
+            tecnico = form.cleaned_data['tecnico']
+            fecha_ingreso = form.cleaned_data['fecha_ingreso']
+            problema_reportado = form.cleaned_data['problema_reportado']
+            estado = form.cleaned_data['estado']
+
+            reparacion = Reparacion(
+                equipo=equipo,
+                tecnico=tecnico,
+                fecha_ingreso=fecha_ingreso,
+                problema_reportado=problema_reportado,
+                estado=estado
+            )
+
+            reparacion.save()
+
+            return redirect('myapp:reparaciones')
+
+    else:
+        form = ReparacionesFormulario()
+
+    return render(
+        request,
+        'myapp/agregar_reparacion.html',
+        {'form': form}
+    )

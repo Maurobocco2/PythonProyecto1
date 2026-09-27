@@ -42,7 +42,7 @@
                 </div>
                 <div class="card-footer text-center">
                     <a href="{% url 'myapp:editar_equipo' equipo.id %}" class="btn btn-warning btn-sm bi bi-pencil-square me-2"></a>
-                    <form action="" method="POST" style="display:inline;"
+                    <form action="{% url 'myapp:eliminar_equipo' equipo.id %}" method="POST" style="display:inline;"
                         onsubmit="return confirm('¿Seguro que deseas eliminar a {{ cliente.nombre }} {{ cliente.apellido }}?')">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger btn-sm bi bi-trash3-fill"></button>
